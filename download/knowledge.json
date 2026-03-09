@@ -1,0 +1,314 @@
+[
+  {
+    "id": "pc_maintenance_001",
+    "module": "PC Maintenance & Repair",
+    "title": "How to Reset BIOS",
+    "content": "# BIOS Reset Guide\n1. Power off the PC.\n2. Open the case and locate the CMOS battery...\n3. Wait 5 minutes, then re-insert the battery.\n4. Power on and enter BIOS to reconfigure settings.",
+    "tags": ["hardware", "bios", "reset", "troubleshooting"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "pc_maintenance_002",
+    "module": "PC Maintenance & Repair",
+    "title": "Diagnosing RAM Issues",
+    "content": "# RAM Diagnostics\n- Use MemTest86 for memory checks.\n- Check for loose modules.\n- Swap RAM slots to isolate faulty sticks.",
+    "tags": ["hardware", "ram", "diagnosis", "tools"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "agent_build_001",
+    "module": "AI Agent Building & Deployment",
+    "title": "Custom Deployment Agent Prompt",
+    "content": "You are a deployment assistant. Use provided scripts to deploy the app. Confirm actions before executing.",
+    "tags": ["ai", "agent", "deployment", "prompt"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "agent_build_002",
+    "module": "AI Agent Building & Deployment",
+    "title": "PowerShell Deployment Script",
+    "content": "powershell\n# Deploy app\nCopy-Item ./build/* \\\\server\\deploy\\app -Recurse",
+    "tags": ["powershell", "deployment", "automation"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "software_eng_001",
+    "module": "Advanced Software Engineering",
+    "title": "Singleton Design Pattern",
+    "content": "# Singleton Pattern\nEnsures a class has only one instance and provides a global point of access.\n\n```python\nclass Singleton:\n    _instance = None\n    def __new__(cls):\n        if not cls._instance:\n            cls._instance = super().__new__(cls)\n        return cls._instance\n```",
+    "tags": ["design pattern", "singleton", "oop", "python"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "software_eng_002",
+    "module": "Advanced Software Engineering",
+    "title": "CI/CD Pipeline Example (GitHub Actions)",
+    "content": "```yaml\nname: CI/CD Pipeline\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v2\n      - name: Install dependencies\n        run: npm install\n      - name: Run tests\n        run: npm test\n```",
+    "tags": ["cicd", "github actions", "automation", "devops"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "prog_ai_001",
+    "module": "Full Programming AI Knowledge",
+    "title": "Python Cheat Sheet",
+    "content": "# Python Basics\n- Variables: `x = 5`\n- Functions: `def foo():`\n- Lists: `[1,2,3]`\n- Loop: `for i in range(5):`\n- Dict: `{'a': 1}`",
+    "tags": ["python", "cheatsheet", "programming", "reference"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "prog_ai_002",
+    "module": "Full Programming AI Knowledge",
+    "title": "JavaScript Debugging Tips",
+    "content": "# Debugging in JavaScript\n- Use `console.log()` for quick inspection.\n- Use browser DevTools (F12).\n- Leverage breakpoints and step-through.",
+    "tags": ["javascript", "debug", "tips", "programming"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "automation_001",
+    "module": "Automation & AI Agent Communication",
+    "title": "Bash Script: Automated Backup",
+    "content": "```bash\n#!/bin/bash\ntar -czf backup_$(date +%F).tar.gz /home/user/data\n```",
+    "tags": ["bash", "automation", "backup", "script"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "automation_002",
+    "module": "Automation & AI Agent Communication",
+    "title": "Task Delegation Pattern",
+    "content": "Describe tasks clearly, assign to agent, confirm completion, and provide feedback.",
+    "tags": ["automation", "delegation", "pattern", "ai agent"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "comm_tools_001",
+    "module": "Communication Tools Integration",
+    "title": "Twilio SMS API Example",
+    "content": "```python\nfrom twilio.rest import Client\nclient = Client(account_sid, auth_token)\nclient.messages.create(body='Hello!', from_='+1234567890', to='+0987654321')\n```",
+    "tags": ["twilio", "sms", "api", "communication"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "comm_tools_002",
+    "module": "Communication Tools Integration",
+    "title": "Chatbot Auto-Responder Template",
+    "content": "Hi {{name}}, thank you for contacting support. How can I help you today?",
+    "tags": ["chatbot", "template", "auto-responder"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "tool_creation_001",
+    "module": "Tool Creation & Innovation",
+    "title": "CLI Tool Scaffold (Python)",
+    "content": "```python\nimport argparse\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument('--foo')\n    args = parser.parse_args()\n    print(args.foo)\nif __name__ == '__main__':\n    main()\n```",
+    "tags": ["cli", "tool", "python", "scaffold"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "tool_creation_002",
+    "module": "Tool Creation & Innovation",
+    "title": "Browser Extension Manifest Example",
+    "content": "```json\n{\n  \"manifest_version\": 3,\n  \"name\": \"My Extension\",\n  \"version\": \"1.0\",\n  \"action\": {\"default_popup\": \"popup.html\"}\n}\n```",
+    "tags": ["extension", "browser", "manifest", "template"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "web_deploy_001",
+    "module": "Website Hosting & Deployment",
+    "title": "Deploy to GitHub Pages",
+    "content": "1. Push your repo to GitHub.\n2. Go to Settings → Pages.\n3. Select branch and folder (e.g., `/docs`).\n4. Save and access your site at `https://<user>.github.io/<repo>`.",
+    "tags": ["github pages", "deploy", "web", "hosting"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "web_deploy_002",
+    "module": "Website Hosting & Deployment",
+    "title": "Netlify Deployment Script",
+    "content": "```bash\nnpm run build\nnpx netlify deploy --prod --dir=build\n```",
+    "tags": ["netlify", "deploy", "script", "hosting"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "mcp_001",
+    "module": "Minecraft Server (MCP) Setup",
+    "title": "Port Forwarding for Minecraft",
+    "content": "1. Log in to your router.\n2. Find port forwarding section.\n3. Forward TCP/UDP port 25565 to your server IP.\n4. Restart router.",
+    "tags": ["minecraft", "server", "port forwarding", "network"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "mcp_002",
+    "module": "Minecraft Server (MCP) Setup",
+    "title": "Install Minecraft Mods",
+    "content": "1. Download mod file (`.jar`).\n2. Place it in the `mods` folder.\n3. Restart the server.",
+    "tags": ["minecraft", "mods", "install", "server"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "github_001",
+    "module": "GitHub Repo Management",
+    "title": "Create New Repo via CLI",
+    "content": "```bash\ngit init\nhub create my-repo\ngit push -u origin main\n```",
+    "tags": ["github", "repo", "cli", "automation"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "github_002",
+    "module": "GitHub Repo Management",
+    "title": "GitHub Actions: Auto-Sync",
+    "content": "```yaml\nname: Auto Sync Repo\non:\n  schedule:\n    - cron: '0 * * * *'\njobs:\n  sync:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v2\n      - name: Sync local changes\n        run: git pull && git push\n```",
+    "tags": ["github actions", "sync", "workflow", "automation"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "web_search_001",
+    "module": "Web Search & Research Integration",
+    "title": "Puppeteer Scraping Script",
+    "content": "```js\nconst puppeteer = require('puppeteer');\n(async () => {\n  const browser = await puppeteer.launch();\n  const page = await browser.newPage();\n  await page.goto('https://example.com');\n  const data = await page.evaluate(() => document.body.innerText);\n  console.log(data);\n  await browser.close();\n})();\n```",
+    "tags": ["puppeteer", "scraping", "web", "automation"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "web_search_002",
+    "module": "Web Search & Research Integration",
+    "title": "Research Summary Template",
+    "content": "## Research Title\n- Summary: ...\n- Key Points: ...\n- References: ...",
+    "tags": ["research", "template", "summary"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "permission_001",
+    "module": "Permission & Safety System",
+    "title": "Permission Dialog Example",
+    "content": "🔐 Permission Required\nRisk Level: LOW\nOpen application: Chrome?\n[✓ Allow Once] [✓ Always Allow] [✗ Deny Once] [✗ Never Allow]",
+    "tags": ["permission", "safety", "dialog", "example"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  },
+  {
+    "id": "voice_001",
+    "module": "Conversational Voice System",
+    "title": "Voice Command Sample Flow",
+    "content": "User: \"Open Chrome\"\nAI: \"I heard: Open Chrome. Is that correct?\"\nUser: \"Yes\"\nAI: [Executes via AI Agent] \"Chrome opened\"",
+    "tags": ["voice", "conversation", "tamil", "english", "sample"],
+    "metadata": {
+      "created": "2025-10-21T00:00:00Z",
+      "updated": "2025-10-21T00:00:00Z",
+      "author": "admin",
+      "version": "1.0"
+    }
+  }
+]

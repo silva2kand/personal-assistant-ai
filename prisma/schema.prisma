@@ -1,0 +1,360 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  avatar       String?
+  preferences  String?  // JSON string for user preferences
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  conversations Conversation[]
+  emailAccounts EmailAccount[]
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  title     String?
+  model     String    @default("z-ai")
+  userId    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id             String      @id @default(cuid())
+  role           String      // 'user', 'assistant', 'system', 'agent'
+  content        String
+  conversationId String
+  agentType      String?     // Type of agent if role is 'agent'
+  agentName      String?     // Name of agent if role is 'agent'
+  createdAt      DateTime    @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}
+
+model Solicitor {
+  id              String   @id @default(cuid())
+  name            String
+  firm            String?
+  email           String?
+  phone           String?
+  address         String?
+  specialty       String?  // Area of law
+  status          String   @default("active") // active, inactive, archived
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  cases           SolicitorCase[]
+  documents       SolicitorDocument[]
+  communications  SolicitorCommunication[]
+}
+
+model SolicitorCase {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      String   @default("open") // open, in_progress, closed
+  caseNumber  String?
+  startDate   DateTime?
+  endDate     DateTime?
+  solicitorId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  solicitor   Solicitor @relation(fields: [solicitorId], references: [id], onDelete: Cascade)
+}
+
+model SolicitorDocument {
+  id          String   @id @default(cuid())
+  name        String
+  type        String?  // contract, letter, form, etc.
+  content     String?  // File path or content
+  notes       String?
+  solicitorId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  solicitor   Solicitor @relation(fields: [solicitorId], references: [id], onDelete: Cascade)
+}
+
+model SolicitorCommunication {
+  id          String   @id @default(cuid())
+  type        String   // email, phone, meeting, letter
+  subject     String?
+  content     String
+  date        DateTime @default(now())
+  solicitorId String
+  createdAt   DateTime @default(now())
+  solicitor   Solicitor @relation(fields: [solicitorId], references: [id], onDelete: Cascade)
+}
+
+model Accountant {
+  id              String   @id @default(cuid())
+  name            String
+  firm            String?
+  email           String?
+  phone           String?
+  address         String?
+  specialty       String?  // Tax, audit, advisory, etc.
+  status          String   @default("active")
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  documents       AccountantDocument[]
+  communications  AccountantCommunication[]
+  deadlines       TaxDeadline[]
+}
+
+model AccountantDocument {
+  id            String   @id @default(cuid())
+  name          String
+  type          String?  // tax_return, financial_statement, invoice, etc.
+  content       String?
+  notes         String?
+  accountantId  String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  accountant    Accountant @relation(fields: [accountantId], references: [id], onDelete: Cascade)
+}
+
+model AccountantCommunication {
+  id            String   @id @default(cuid())
+  type          String
+  subject       String?
+  content       String
+  date          DateTime @default(now())
+  accountantId  String
+  createdAt     DateTime @default(now())
+  accountant    Accountant @relation(fields: [accountantId], references: [id], onDelete: Cascade)
+}
+
+model TaxDeadline {
+  id            String   @id @default(cuid())
+  title         String
+  description   String?
+  deadlineDate  DateTime
+  status        String   @default("upcoming") // upcoming, completed, missed
+  accountantId  String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  accountant    Accountant @relation(fields: [accountantId], references: [id], onDelete: Cascade)
+}
+
+model Supplier {
+  id              String   @id @default(cuid())
+  name            String
+  category        String?  // IT, Office, Manufacturing, etc.
+  email           String?
+  phone           String?
+  address         String?
+  website         String?
+  status          String   @default("active")
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  orders          SupplierOrder[]
+  invoices        SupplierInvoice[]
+  communications  SupplierCommunication[]
+}
+
+model SupplierOrder {
+  id            String   @id @default(cuid())
+  orderNumber   String?
+  description   String
+  amount        Float?
+  currency      String   @default("GBP")
+  status        String   @default("pending") // pending, processing, shipped, delivered, cancelled
+  orderDate     DateTime @default(now())
+  deliveryDate  DateTime?
+  supplierId    String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  supplier      Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+}
+
+model SupplierInvoice {
+  id            String   @id @default(cuid())
+  invoiceNumber String?
+  amount        Float
+  currency      String   @default("GBP")
+  status        String   @default("pending") // pending, paid, overdue
+  issueDate     DateTime @default(now())
+  dueDate       DateTime?
+  supplierId    String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  supplier      Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+}
+
+model SupplierCommunication {
+  id            String   @id @default(cuid())
+  type          String
+  subject       String?
+  content       String
+  date          DateTime @default(now())
+  supplierId    String
+  createdAt     DateTime @default(now())
+  supplier      Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+}
+
+model EmailAccount {
+  id          String   @id @default(cuid())
+  provider    String   // gmail, outlook, hotmail, live, microsoft
+  email       String
+  displayName String?
+  status      String   @default("connected")
+  lastSync    DateTime?
+  userId      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AgentSession {
+  id          String   @id @default(cuid())
+  agentType   String   // legal, financial, supplier, email, research
+  status      String   @default("idle") // idle, active, processing, error
+  lastActive  DateTime @default(now())
+  context     String?  // JSON string for agent context
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model EmailMessage {
+  id                String   @id @default(cuid())
+  provider          String   // gmail | outlook
+  providerMessageId String
+  threadKey         String?
+  fromAddress       String
+  toAddress         String
+  subject           String
+  body              String
+  date              DateTime
+  labelsJson        String?  // JSON array
+  classifiedAs      String?  // solicitor | accountant | supplier | research | general
+  entityKey         String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  events AgentEvent[]
+
+  @@unique([provider, providerMessageId])
+  @@index([provider, date])
+  @@index([classifiedAs, entityKey])
+}
+
+model AgentEntity {
+  id           String   @id @default(cuid())
+  agentType    String   // solicitor | accountant | supplier | research | general
+  entityKey    String
+  title        String
+  status       String   @default("open") // open | waiting | blocked | closed
+  lastUpdateAt DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  events AgentEntityEvent[]
+  state  AgentEntityState?
+  queue  AgentEvent[]
+
+  @@unique([agentType, entityKey])
+  @@index([agentType, status])
+}
+
+model AgentEntityEvent {
+  id            String   @id @default(cuid())
+  agentEntityId String
+  source        String   // email | file | manual
+  sourceRef     String   // email id | file id | note id
+  summary       String
+  rawRef        String?
+  createdAt     DateTime @default(now())
+
+  agentEntity AgentEntity @relation(fields: [agentEntityId], references: [id], onDelete: Cascade)
+
+  @@index([agentEntityId, createdAt])
+}
+
+model AgentEntityState {
+  id            String   @id @default(cuid())
+  agentEntityId String   @unique
+  stateJson     String
+  updatedAt     DateTime @default(now())
+  createdAt     DateTime @default(now())
+
+  agentEntity AgentEntity @relation(fields: [agentEntityId], references: [id], onDelete: Cascade)
+}
+
+model AgentEvent {
+  id             String   @id @default(cuid())
+  agentType      String   // solicitor | accountant | supplier | research | general
+  emailMessageId String
+  agentEntityId  String
+  entityKey      String
+  eventType      String   @default("NEW_EMAIL")
+  status         String   @default("pending") // pending | processing | done | error
+  createdAt      DateTime @default(now())
+  processedAt    DateTime?
+
+  emailMessage EmailMessage @relation(fields: [emailMessageId], references: [id], onDelete: Cascade)
+  agentEntity  AgentEntity  @relation(fields: [agentEntityId], references: [id], onDelete: Cascade)
+
+  @@index([agentType, status, createdAt])
+  @@index([agentEntityId, status])
+}
+
+model WorkerCursor {
+  id            String   @id @default(cuid())
+  provider      String   @unique // gmail | outlook
+  lastCheckedAt DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model VaultDocument {
+  id              String   @id @default(cuid())
+  title           String
+  category        String   // lease | legal | financial | insurance | contract | general
+  tagsJson        String?  // JSON array of strings
+  summary         String?
+  relatedEntity   String?  // property/accountant/solicitor/supplier reference
+  source          String   @default("manual") // manual | email | api
+  sourceRef       String?  // emailMessage.id or external id
+  storagePath     String
+  originalName    String
+  mimeType        String?
+  sizeBytes       Int
+  sha256          String
+  extractedText   String?
+  extractionState String   @default("none") // none | extracted | pending_ocr | failed
+  expiresAt       DateTime?
+  uploadedBy      String?  // user email/id
+  status          String   @default("active") // active | archived | deleted
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([category, status])
+  @@index([expiresAt, status])
+  @@index([createdAt])
+  @@index([source, sourceRef])
+}
+
+model VaultAccessLog {
+  id         String   @id @default(cuid())
+  documentId String
+  action     String   // upload | download | preview | metadata-update | delete
+  actor      String?  // user/email/system
+  note       String?
+  createdAt  DateTime @default(now())
+
+  @@index([documentId, createdAt])
+}

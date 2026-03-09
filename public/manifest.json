@@ -1,0 +1,49 @@
+{
+  "name": "AI Assistant Pro",
+  "short_name": "AI Assistant",
+  "description": "Professional AI Assistant with UK Solicitor, Accountant, and Supplier Tracking",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#2563eb",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Chat",
+      "short_name": "Chat",
+      "description": "Start a new chat conversation",
+      "url": "/?action=new-chat",
+      "icons": [{ "src": "/logo.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Solicitor",
+      "short_name": "Solicitor",
+      "description": "UK Solicitor tracking",
+      "url": "/?panel=solicitor",
+      "icons": [{ "src": "/logo.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Accountant",
+      "short_name": "Accountant",
+      "description": "UK Accountant tracking",
+      "url": "/?panel=accountant",
+      "icons": [{ "src": "/logo.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Suppliers",
+      "short_name": "Suppliers",
+      "description": "UK Supplier tracking",
+      "url": "/?panel=supplier",
+      "icons": [{ "src": "/logo.svg", "sizes": "96x96" }]
+    }
+  ],
+  "categories": ["productivity", "business", "utilities"]
+}
